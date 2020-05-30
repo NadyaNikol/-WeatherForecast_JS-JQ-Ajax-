@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<style>
+    
+    .div1
+    {
+        border: 2px solid black;
+        border-radius: 10px;
+        width: 50%;
+        margin: auto;
+        height: 10em;
+        position: relative;
+    }
+    
+    .div11 
+    {
+        position: absolute; 
+        width: 60%;
+        height: inherit;
+        padding-left: 20px;
+    }
+    
+    .div12 
+    {
+        position: absolute;
+        left: 60%;
+        width: 40%; 
+        height: inherit;
+    }
+    
+    img {width: 60px; height: auto;}
+
+    .div11 p:nth-child(3) {position: absolute; left: 150px; top: 50px; font-size: 30px;}
+
+    </style>
+
+<body>
+    <div class="div1">
+       
+        <div class="div11">
+            <h3 id="nameTown">Odessa</h3>
+            <div>
+            <img id="im">
+            <p id="weath"></p>
+            </div>
+            <p id="deg">2</p>
+        </div>
+        
+        <div class="div12">
+            <p id="dat">12:30</p>
+            <p id="w">12:30</p>
+            <p id="pr">12:30</p>
+            <p id="press">12:30</p>
+
+        </div>
+        
+    </div>
+</body>
+
+<script>
+   
+      $(function(){
+    
+       $.get('http://api.weatherstack.com/current?access_key=4031b744118432c78eee4e66c58ae881&query=Kryvyy Rih').done(function(data)
+                            {
+     $('#nameTown').html(data.request.query);
+    im.src = data.current.weather_icons;
+    $(`#weath`).html(data.current.weather_descriptions);
+    $(`#deg`).html(data.current.temperature + ' &deg;C');
+
+    $(`#dat`).html(data.current.observation_time);
+    $(`#w`).html(data.current.wind_speed + ' kph');
+    $(`#pr`).html(data.current.precip + ' mm'); 
+    $(`#press`).html(data.current.pressure + ' mb');
+    
+})
+
+  
+    
+});
+    
+</script>
+
+</html>
